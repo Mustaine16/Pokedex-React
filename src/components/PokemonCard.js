@@ -30,3 +30,20 @@ const PokemonCard = props => {
 };
 
 export default PokemonCard;
+
+// <main>
+// <section className="pkmn-list">
+//   {localData.map((e, i) => (
+//     <PokemonCard data={state[i]} key={state[i].id}></PokemonCard>
+//   ))}
+// </section>
+// </main>
+
+// <button
+// onClick={() => {
+//   setGen(gen === 7 ? 1 : gen + 1);
+
+//   setState([]);
+// }}>
+// Click!
+// </button>

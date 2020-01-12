@@ -1,0 +1,5 @@
+select {
+  grid-area: 1/1/1/-1;
+  background: #ef5350;
+  padding: 1em;
+}

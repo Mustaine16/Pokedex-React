@@ -8,7 +8,7 @@ import localData from "../localData";
 function Home() {
   //Home will be in charge of the state of the Pokemon List and when it must be filtered
 
-  const localPokmenonData = localData;
+  const localPokemonData = localData;
   const [filteredList, setFilteredList] = useState(localData);
   const [generation, setGeneration] = useState(1);
 
@@ -50,7 +50,7 @@ function Home() {
         break;
     }
 
-    setFilteredList(localPokmenonData.filter((e, i) => i >= start && i <= end));
+    setFilteredList(localPokemonData.filter((e, i) => i >= start && i <= end));
   };
 
   return (

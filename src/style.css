@@ -2,7 +2,7 @@
   /* font-family: 'Lato', sans-serif;
    */
   font-family: "Poppins", sans-serif;
-  color: whitesmoke;
+  /*color: whitesmoke;*/
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -825,6 +825,8 @@ img {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  width: 25%;
+  margin: auto;
   text-transform: uppercase;
   text-align: center;
   border-radius: 0.7em;

@@ -9247,7 +9247,7 @@ const localData = [
   },
   {
     id: 774,
-    name: "minior-red-meteor",
+    name: "minior-meteor",
     types: [
       {
         slot: 2,
@@ -9299,7 +9299,7 @@ const localData = [
   },
   {
     id: 778,
-    name: "mimikyu-disguised",
+    name: "mimikyu",
     types: [
       {
         slot: 2,

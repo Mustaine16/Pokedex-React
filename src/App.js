@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "./App.css";
 
-import Layout from "./components/Layout";
+import Layout from "./components/home/Layout";
 import Home from "./pages/Home";
 import PokemonPage from "./pages/PokemonPage";
 

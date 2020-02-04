@@ -7,7 +7,7 @@ const ListContainer = props => {
   return (
     <main>
       <section className="pkmn-list">
-        <GenerationDropdown onChange={props.onChange} />
+        <GenerationDropdown onChange={props.changeGeneration} />
         <List filteredList={props.filteredList} />
       </section>
     </main>

@@ -6,7 +6,7 @@ function Footer() {
       <p>Pokémon© and Pokémon character names are trademarks of Nintendo©.</p>
       <p>
         This Pokedex consumes the{" "}
-        <a href="https://pokeapi.co/" target="_blank" rel="noreferrer">
+        <a href="https://pokeapi.co/" target="_blank" rel="noopener noreferrer">
           PokeApi
         </a>
       </p>

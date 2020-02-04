@@ -1,0 +1,22 @@
+article {
+  padding: 0.5em;
+}
+
+.description {
+  margin-bottom: 1em;
+  line-height: 2em;
+}
+
+.info-container {
+  /* padding: .5em; */
+  border-radius: 10px;
+  justify-content: space-around;
+  display: flex;
+  box-shadow: 0 0 18px 10px #0000000a;
+}
+
+.info-boxes {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+}

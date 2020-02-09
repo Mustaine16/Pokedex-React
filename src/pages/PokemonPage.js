@@ -28,7 +28,7 @@ function PokemonPage(props) {
     return () => {
       myAbortController.abort();
     };
-  }, []);
+  }, [props.match.params.id]);
 
   if (!data) {
     return "loading";

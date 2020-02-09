@@ -2,46 +2,72 @@ import React, { useState, useEffect } from "react";
 
 import TabMenu from "../TabMenu/TabMenu";
 import Description from "../Description/Description";
+import Weakness from "../Weakness/Weakness";
 
 import "./DataContainer.css";
 import Stats from "../Stats/Stats";
 
 function DataContainer({ data }) {
-  const [speciesData, setspeciesData] = useState({});
   const [description, setDescription] = useState([]);
+  const [state, setState] = useState({
+    loading: true,
+    error: false
+  });
 
   useEffect(() => {
     const URL = `https://pokeapi.co/api/v2/pokemon-species/${data.id}/`;
+    let didCancel = false; //Variable que ayuda a cancelar el setState en caso de que el componente se desmonte
 
     const speciesDataFetched = async () => {
+      setState({
+        loading: true,
+        error: false
+      });
       try {
-        const response = await fetch(URL);
-        const result = await response.json();
-        setspeciesData(result);
-        setDescription(
-          response["flavor_text_entries"].filter(
-            e => e.language.name === "en"
-          )[0]["flavor_text"]
-        );
+        const data = await fetch(URL);
+        const result = await data.json();
+        if (!didCancel) {
+          setDescription(
+            result["flavor_text_entries"].filter(
+              e => e.language.name === "en"
+            )[0]["flavor_text"]
+          );
+          setState({
+            loading: false,
+            error: false
+          });
+        }
       } catch (error) {
         return "error";
       }
     };
     speciesDataFetched();
+
+    return () => {
+      didCancel = true;
+    };
   }, [description, data]);
 
-  if (!description || !speciesData) {
-    return "loading";
+  if (state.loading) {
+    return (
+      <section className="tabs">
+        <p>Loading</p>
+      </section>
+    );
   }
 
   return (
-    <section className="section">
+    <section className="tabs">
       <TabMenu></TabMenu>
-      <Description
-        description={description}
-        weight={data.weight}
-        height={data.height}></Description>
-      <Stats stats={data.stats}></Stats>
+      <div className="container">
+        <Description
+          description={description}
+          weight={data.weight}
+          height={data.height}
+        />
+        <Stats stats={data.stats} types={data.types}></Stats>
+        <Weakness></Weakness>
+      </div>
     </section>
   );
 }

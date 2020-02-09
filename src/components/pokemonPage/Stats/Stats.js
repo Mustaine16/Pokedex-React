@@ -1,62 +1,28 @@
 import React from "react";
 
-function Stats() {
+function Stats({ stats, types }) {
   return (
-    <div className="stats-container">
-      <div className="stats-row">
-        <span>HP</span>
-        <div className="stats-value-and-bar">
-          <span className="stat-value">50</span>
-          <div className="stat-bar">
-            <div className="stat-bar-bg"></div>
+    <div className="stats-container content">
+      {[...stats].reverse().map(stat => {
+        return (
+          <div className="stats-row" key={stat["stat"]["name"]}>
+            <span>{stat["stat"]["name"]}</span>
+            <div className="stats-value-and-bar">
+              <span className="stat-value">{stat["base_stat"]}</span>
+              <div className="stat-bar">
+                <div
+                  className={`stat-bar-bg ${types[0].type.name}-cardy`}
+                  style={{
+                    width:
+                      stat["base_stat"] > 180
+                        ? stat["base_stat"] / 2.55 + "%"
+                        : stat["base_stat"] / 1.8 + "%"
+                  }}></div>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <div className="stats-row">
-        <span>Attack</span>
-        <div className="stats-value-and-bar">
-          <span className="stat-value">95</span>
-          <div className="stat-bar">
-            <div className="stat-bar-bg"></div>
-          </div>
-        </div>
-      </div>
-      <div className="stats-row">
-        <span>Defense</span>
-        <div className="stats-value-and-bar">
-          <span className="stat-value">180</span>
-          <div className="stat-bar">
-            <div className="stat-bar-bg"></div>
-          </div>
-        </div>
-      </div>
-      <div className="stats-row">
-        <span>Sp Att.</span>
-        <div className="stats-value-and-bar">
-          <span className="stat-value">85</span>
-          <div className="stat-bar">
-            <div className="stat-bar-bg"></div>
-          </div>
-        </div>
-      </div>
-      <div className="stats-row">
-        <span>Sp Def.</span>
-        <div className="stats-value-and-bar">
-          <span className="stat-value">45</span>
-          <div className="stat-bar">
-            <div className="stat-bar-bg"></div>
-          </div>
-        </div>
-      </div>
-      <div className="stats-row">
-        <span> Speed</span>
-        <div className="stats-value-and-bar">
-          <span className="stat-value">70</span>
-          <div className="stat-bar">
-            <div className="stat-bar-bg"></div>
-          </div>
-        </div>
-      </div>
+        );
+      })}
     </div>
   );
 }

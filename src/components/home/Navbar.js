@@ -1,6 +1,6 @@
 import React from "react";
 
-function Navbar() {
+function Navbar(props) {
   return (
     <header className="header-sticky">
       <nav className="nav-bar">
@@ -38,6 +38,7 @@ function Navbar() {
             type="text"
             className="search-input"
             placeholder="Search for a Pokemon..."
+            onChange={props.onChangeName}
           />
           <button className="clear-search"></button>
         </div>

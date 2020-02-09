@@ -3,13 +3,16 @@ import "./TabMenu.css";
 
 function TabMenu() {
   return (
-    <nav>
-      <ul>
-        <li tabIndex="0">Description</li>
-        <li tabIndex="0">Stats</li>
-        <li tabIndex="0">Weakness</li>
-      </ul>
-    </nav>
+    <>
+      <input type="radio" id="descr" name="tabs" />
+      <label htmlFor="descr">Description</label>
+
+      <input type="radio" id="stats" name="tabs" />
+      <label htmlFor="stats">Stats</label>
+
+      <input type="radio" id="weakness" name="tabs" />
+      <label htmlFor="weakness">Weakness</label>
+    </>
   );
 }
 

@@ -4,7 +4,7 @@ import "./Description.css";
 
 function Description({ description, weight, height }) {
   return (
-    <article>
+    <article className="content">
       <p className="description">{description}</p>
       <div className="info-container">
         <div className="info-boxes">

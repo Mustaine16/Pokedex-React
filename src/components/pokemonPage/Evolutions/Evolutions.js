@@ -1,5 +1,5 @@
 import React from "react";
 
-export default function Weakness() {
+export default function Evolutions() {
   return <div className="content">Hola</div>;
 }

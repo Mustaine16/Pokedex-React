@@ -12,6 +12,9 @@ function TabMenu() {
 
       <input type="radio" id="weakness" name="tabs" />
       <label htmlFor="weakness">Weakness</label>
+
+      <input type="radio" id="evolutions" name="tabs" />
+      <label htmlFor="evolutions">Evolutions</label>
     </>
   );
 }

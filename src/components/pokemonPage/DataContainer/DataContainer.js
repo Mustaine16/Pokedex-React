@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 
 import TabMenu from "../TabMenu/TabMenu";
 import Description from "../Description/Description";
-import Weakness from "../Weakness/Weakness";
+import WeaknessesContainer from "../../../Containers/WeaknessesContainer";
+import Evolutions from "../Evolutions/Evolutions";
 
 import "./DataContainer.css";
 import Stats from "../Stats/Stats";
@@ -66,7 +67,8 @@ function DataContainer({ data }) {
           height={data.height}
         />
         <Stats stats={data.stats} types={data.types}></Stats>
-        <Weakness></Weakness>
+        <WeaknessesContainer types={data.types}></WeaknessesContainer>
+        <Evolutions></Evolutions>
       </div>
     </section>
   );

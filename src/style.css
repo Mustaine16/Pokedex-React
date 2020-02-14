@@ -1552,3 +1552,7 @@ a:hover {
 .tabs input:nth-of-type(3):checked ~ .container .content {
   transform: translateX(-200%);
 }
+
+.tabs input:nth-of-type(4):checked ~ .container .content {
+  transform: translateX(-300%);
+}

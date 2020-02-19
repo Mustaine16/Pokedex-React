@@ -1,0 +1,66 @@
+ul {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.3em;
+}
+
+.tabs {
+  width: 100%;
+  /* height: 60vh; */
+  /* background: #fff; */
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: -1em;
+  border-radius: 20px;
+  transition: all 0.3s;
+  overflow-x: hidden;
+}
+
+.tabs input {
+  display: none;
+}
+
+.tabs label {
+  flex: 1;
+  text-align: center;
+  line-height: 3.2rem;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  background: white;
+  color: black;
+}
+
+.tabs label:hover {
+  background: #0001;
+}
+
+.tabs input:checked + label {
+  box-shadow: inset 0 -0.2rem #ff506f;
+}
+
+.container {
+  display: flex;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+.content {
+  flex: 0 0 100%;
+  padding: 1.5rem;
+  box-sizing: border-box;
+}
+
+.tabs input:nth-of-type(2):checked ~ .container .content {
+  transform: translateX(-100%);
+}
+
+.tabs input:nth-of-type(3):checked ~ .container .content {
+  transform: translateX(-200%);
+}
+
+.tabs input:nth-of-type(4):checked ~ .container .content {
+  transform: translateX(-300%);
+}

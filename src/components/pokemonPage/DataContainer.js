@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
 
-import TabMenu from "../TabMenu/TabMenu";
-import Description from "../Description/Description";
-import WeaknessesContainer from "../../../Containers/WeaknessesContainer";
-import Evolutions from "../Evolutions/Evolutions";
+import TabMenu from "./TabMenu";
+import Description from "./Description";
+import WeaknessesContainer from "../../Containers/WeaknessesContainer";
+import Evolutions from "./Evolutions";
 
-import "./DataContainer.css";
-import Stats from "../Stats/Stats";
+import "./css/DataContainer.css";
+import Stats from "./Stats";
 
 function DataContainer({ data }) {
   const [description, setDescription] = useState([]);
+  const { types } = data;
   const [state, setState] = useState({
     loading: true,
     error: false
@@ -56,9 +57,10 @@ function DataContainer({ data }) {
       </section>
     );
   }
-
+  console.table(types);
   return (
-    <section className="tabs">
+    <section
+      className={`tabs ${types[1] ? types[1].type.name : types[0].type.name}`}>
       <TabMenu></TabMenu>
       <div className="container">
         <Description

@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./Description.css";
+import "./css/Description.css";
 
 function Description({ description, weight, height }) {
   return (

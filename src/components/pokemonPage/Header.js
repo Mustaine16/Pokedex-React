@@ -1,9 +1,9 @@
 import React from "react";
 
-import Sprite from "../../home/Sprite";
-import Types from "../../home/Types";
+import Sprite from "../home/Sprite";
+import Types from "../home/Types";
 
-import "./Header.css";
+import "./css/Header.css";
 
 function Header({ types, name, id }) {
   return (

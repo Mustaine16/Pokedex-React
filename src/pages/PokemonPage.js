@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Fragment } from "react";
 
-import Header from "../components/pokemonPage/Header/Header";
-import DataContainer from "../components/pokemonPage/DataContainer/DataContainer";
+import Header from "../components/pokemonPage/Header";
+import DataContainer from "../components/pokemonPage/DataContainer";
 
 function PokemonPage(props) {
   const [data, setData] = useState();

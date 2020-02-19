@@ -17,7 +17,9 @@ const useFilterByGeneration = () => {
     localStorage.setItem("generation", selected);
   }
 
-  useEffect(() => {
+  React.useMemo(() => {
+    // console.log("CORRIENDO");
+
     const filteredPokemons = filterByGeneration(generation);
     function filterByGeneration(generation) {
       let firstPkmnOfGeneration, lastPkmnOfGeneration;
@@ -63,7 +65,7 @@ const useFilterByGeneration = () => {
     setListByGeneration(filteredPokemons);
   }, [generation]);
 
-  return [{ listByGeneration }, changeGeneration];
+  return [listByGeneration, changeGeneration];
 };
 
 /*Hook filtrado por Nombre */
@@ -76,10 +78,13 @@ const useFilterByName = () => {
     setQueryName(event.target.value);
   }
 
-  useEffect(() => {
-    const filteredByName = localData.filter(e => e.name.startsWith(queryName));
-    setListByName(filteredByName);
+  const filteredByName = React.useMemo(() => {
+    return localData.filter(e => e.name.startsWith(queryName));
   }, [queryName]);
+
+  useEffect(() => {
+    setListByName(filteredByName);
+  }, [filteredByName]);
 
   return [queryName, listByName, handleChange];
 };
@@ -103,7 +108,7 @@ function Home() {
   // Filters
 
   //By Generation
-  const [{ listByGeneration }, changeGeneration] = useFilterByGeneration();
+  const [listByGeneration, changeGeneration] = useFilterByGeneration();
 
   useEffect(() => {
     setFilteredList(listByGeneration);
@@ -121,11 +126,18 @@ function Home() {
       setFilteredList(listByGeneration);
     }
   }, [listByName]);
+
+  //By Type
+
   // useEffect(() => setFilteredList(listByType), [type]);
 
   return (
     <>
-      <Navbar onChangeName={handleByName}></Navbar>
+      <Navbar
+        onChangeName={handleByName}
+        onClick={event =>
+          console.log(event.target.getAttribute("data-value"))
+        }></Navbar>
       <ListContainer
         onChange={changeGeneration}
         filteredList={filteredList}></ListContainer>

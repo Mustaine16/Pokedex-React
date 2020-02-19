@@ -1,6 +1,9 @@
 import React from "react";
 
 function Stats({ stats, types }) {
+  const maxStat = Math.max(...[...stats].map(stat => stat.base_stat));
+  const divider =
+    maxStat >= 130 ? (maxStat / 90).toFixed(2) : (maxStat / 75).toFixed(2);
   return (
     <div className="stats-container content">
       {[...stats].reverse().map(stat => {
@@ -14,9 +17,9 @@ function Stats({ stats, types }) {
                   className={`stat-bar-bg ${types[0].type.name}-cardy`}
                   style={{
                     width:
-                      stat["base_stat"] > 180
-                        ? stat["base_stat"] / 2.55 + "%"
-                        : stat["base_stat"] / 1.8 + "%"
+                      maxStat > 100
+                        ? stat["base_stat"] / divider + "%"
+                        : stat["base_stat"] / 1.4 + "%"
                   }}></div>
               </div>
             </div>

@@ -1,5 +1,5 @@
 import React from "react";
-import "./TabMenu.css";
+import "./css/TabMenu.css";
 
 function TabMenu() {
   return (
@@ -10,8 +10,8 @@ function TabMenu() {
       <input type="radio" id="stats" name="tabs" />
       <label htmlFor="stats">Stats</label>
 
-      <input type="radio" id="weakness" name="tabs" />
-      <label htmlFor="weakness">Weakness</label>
+      <input type="radio" id="Damage Relation" name="tabs" />
+      <label htmlFor="Damage Relation">Damage </label>
 
       <input type="radio" id="evolutions" name="tabs" />
       <label htmlFor="evolutions">Evolutions</label>

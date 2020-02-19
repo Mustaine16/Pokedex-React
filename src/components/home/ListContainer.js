@@ -18,7 +18,7 @@ const ListContainer = props => {
   } else {
     return (
       <>
-        <figure class="">
+        <figure className="">
           <img src={pokeballMissing} alt="pokemon-missing" />
           <p>I don't think that pokemon does exist, try again!</p>
         </figure>

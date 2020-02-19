@@ -14,7 +14,6 @@ const PokemonCard = ({ data }) => {
         data-type1={data.type1}
         data-type2={data.type2}>
         <h3 className="pkmn-name">{data.name}</h3>
-        <h4>{data.id}</h4>
         <Sprite id={data.id} name={data.name}></Sprite>
       </article>
     </Link>

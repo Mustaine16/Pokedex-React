@@ -14,7 +14,7 @@ function Stats({ stats, types }) {
               <span className="stat-value">{stat["base_stat"]}</span>
               <div className="stat-bar">
                 <div
-                  className={`stat-bar-bg ${types[0].type.name}-cardy`}
+                  className={`stat-bar-bg`}
                   style={{
                     width:
                       maxStat > 100

@@ -11,15 +11,13 @@ const useFilterByGeneration = () => {
   const [generation, setGeneration] = useState(1);
   const [listByGeneration, setListByGeneration] = useState([]);
 
-  function changeGeneration(event) {
+  function handleByGeneration(event) {
     const selected = Number(event.target.value);
     setGeneration(selected);
     localStorage.setItem("generation", selected);
   }
 
   React.useMemo(() => {
-    // console.log("CORRIENDO");
-
     const filteredPokemons = filterByGeneration(generation);
     function filterByGeneration(generation) {
       let firstPkmnOfGeneration, lastPkmnOfGeneration;
@@ -65,7 +63,7 @@ const useFilterByGeneration = () => {
     setListByGeneration(filteredPokemons);
   }, [generation]);
 
-  return [listByGeneration, changeGeneration];
+  return [listByGeneration, handleByGeneration];
 };
 
 /*Hook filtrado por Nombre */
@@ -74,19 +72,49 @@ const useFilterByName = () => {
   const [queryName, setQueryName] = useState("");
   const [listByName, setListByName] = useState([]);
 
-  function handleChange(event) {
-    setQueryName(event.target.value);
+  function handleByName(event) {
+    setQueryName(event.target.value.toLowerCase());
   }
 
-  const filteredByName = React.useMemo(() => {
+  const filterByName = React.useMemo(() => {
     return localData.filter(e => e.name.startsWith(queryName));
   }, [queryName]);
 
   useEffect(() => {
-    setListByName(filteredByName);
-  }, [filteredByName]);
+    setListByName(filterByName);
+  }, [filterByName]);
 
-  return [queryName, listByName, handleChange];
+  return [queryName, listByName, handleByName];
+};
+
+/*Hook filtrado por Tipo */
+
+const useFilterByType = () => {
+  const [queryType, setQueryType] = useState();
+  const [listByType, setListByType] = useState([]);
+
+  function handleByType(event) {
+    const typeSelected = event.target.dataset.value;
+    setQueryType(typeSelected);
+  }
+
+  const filterByType = React.useMemo(() => {
+
+    const filtered = localData.filter(pkmn => {
+      return pkmn.types.length > 1
+        ? pkmn.types[0].type.name === queryType ||
+            pkmn.types[1].type.name === queryType
+        : pkmn.types[0].type.name === queryType;
+    });
+
+    return filtered;
+  }, [queryType]);
+
+  useEffect(() => {
+    setListByType(filterByType);
+  }, [filterByType]);
+
+  return [listByType, handleByType];
 };
 
 /* Componente */
@@ -104,11 +132,11 @@ function Home() {
   */
 
   const [filteredList, setFilteredList] = useState([]);
-
+  const [actualFilter, setActualFilter] = useState("")
   // Filters
 
   //By Generation
-  const [listByGeneration, changeGeneration] = useFilterByGeneration();
+  const [listByGeneration, handleByGeneration] = useFilterByGeneration();
 
   useEffect(() => {
     setFilteredList(listByGeneration);
@@ -129,18 +157,19 @@ function Home() {
 
   //By Type
 
-  // useEffect(() => setFilteredList(listByType), [type]);
+  const [listByType, handleByType] = useFilterByType();
+
+  useEffect(() => {
+    if (listByType.length > 0) setFilteredList(listByType);
+  }, [listByType]);
 
   return (
     <>
-      <Navbar
-        onChangeName={handleByName}
-        onClick={event =>
-          console.log(event.target.getAttribute("data-value"))
-        }></Navbar>
+      <Navbar onChangeName={handleByName} onChangeType={handleByType}></Navbar>
       <ListContainer
-        onChange={changeGeneration}
-        filteredList={filteredList}></ListContainer>
+        onChange={handleByGeneration}
+        filteredList={filteredList}
+      ></ListContainer>
     </>
   );
 }

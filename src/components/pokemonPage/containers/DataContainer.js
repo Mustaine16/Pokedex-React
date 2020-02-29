@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 
-import TabMenu from "./TabMenu";
-import Description from "./Description";
-import WeaknessesContainer from "../../Containers/WeaknessesContainer";
-import Evolutions from "./Evolutions";
+import TabMenu from "../TabMenu";
+import Description from "../Description";
+import DamageContainer from "./DamageContainer";
+import Evolutions from "../Evolutions";
 
-import "./css/DataContainer.css";
-import Stats from "./Stats";
+import "../css/DataContainer.css";
+import Stats from "../Stats";
 
 function DataContainer({ data }) {
   const [description, setDescription] = useState([]);
@@ -18,35 +18,42 @@ function DataContainer({ data }) {
 
   useEffect(() => {
     const URL = `https://pokeapi.co/api/v2/pokemon-species/${data.id}/`;
-    let didCancel = false; //Variable que ayuda a cancelar el setState en caso de que el componente se desmonte
+
+    //Abort fetch
+    const myAbortController = new AbortController();
+    const signal = myAbortController.signal;
 
     const speciesDataFetched = async () => {
+
       setState({
         loading: true,
         error: false
       });
+
       try {
-        const data = await fetch(URL);
+
+        const data = await fetch(URL, { signal });
         const result = await data.json();
-        if (!didCancel) {
-          setDescription(
-            result["flavor_text_entries"].filter(
-              e => e.language.name === "en"
-            )[0]["flavor_text"]
-          );
-          setState({
-            loading: false,
-            error: false
-          });
-        }
+
+        setDescription(
+          result["flavor_text_entries"].filter(
+            e => e.language.name === "en"
+          )[0]["flavor_text"]
+        );
+        setState({
+          loading: false,
+          error: false
+        });
+
       } catch (error) {
         return "error";
       }
     };
     speciesDataFetched();
 
+    //Clean async call
     return () => {
-      didCancel = true;
+      myAbortController.abort();
     };
   }, [description, data]);
 
@@ -60,8 +67,10 @@ function DataContainer({ data }) {
   console.table(types);
   return (
     <section
-      className={`tabs ${types[1] ? types[1].type.name : types[0].type.name}`}>
+      className={`tabs ${types[1] ? types[1].type.name : types[0].type.name}`}
+    >
       <TabMenu></TabMenu>
+
       <div className="container">
         <Description
           description={description}
@@ -69,7 +78,9 @@ function DataContainer({ data }) {
           height={data.height}
         />
         <Stats stats={data.stats} types={data.types}></Stats>
-        <WeaknessesContainer types={data.types}></WeaknessesContainer>
+
+        <DamageContainer types={data.types}></DamageContainer>
+
         <Evolutions></Evolutions>
       </div>
     </section>

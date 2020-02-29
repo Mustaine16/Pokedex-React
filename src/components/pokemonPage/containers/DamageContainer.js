@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
 
-import Weaknesses from "../components/pokemonPage/Weaknesses";
+import Damage from "../DamageRelations";
 
-export default function WeaknessesContainer(props) {
+export default function DamageContainer(props) {
   const { types } = props;
   const [damageRelations, setDamageRelations] = useState();
 
   useEffect(() => {
+
+    const myAbortController = new AbortController();
+    const signal = myAbortController.signal
+
     const calculateDamageRelations = async types => {
       let calculatedDamage = {
         attack: [
@@ -30,8 +34,8 @@ export default function WeaknessesContainer(props) {
       let defQuarterArr = [];
 
       for (let i = 0; i < types.length; i++) {
-        const url = types[i].type.url;
-        await fetch(`${url}`)
+        const URL = types[i].type.url;
+        await fetch( URL , {signal} )
           .then(res => res.json())
           .then(res => {
             /*********************
@@ -215,8 +219,13 @@ export default function WeaknessesContainer(props) {
 
       setDamageRelations(calculatedDamage);
     };
+
     calculateDamageRelations(types);
+
+    return ()=>{
+      myAbortController.abort();
+    }
   }, [types]);
 
-  return <Weaknesses data={damageRelations} types={types}></Weaknesses>;
+  return <Damage data={damageRelations} types={types}></Damage>;
 }

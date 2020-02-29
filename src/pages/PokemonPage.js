@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Fragment } from "react";
 
 import Header from "../components/pokemonPage/Header";
-import DataContainer from "../components/pokemonPage/DataContainer";
+import DataContainer from "../components/pokemonPage/containers/DataContainer";
 
 function PokemonPage(props) {
   const [data, setData] = useState();
@@ -10,16 +10,22 @@ function PokemonPage(props) {
   useEffect(() => {
     const pokemonID = props.match.params.id;
     const URL = `https://pokeapi.co/api/v2/pokemon/${pokemonID}`;
+    
     const myAbortController = new AbortController();
+    const signal = myAbortController.signal
 
     const fetchData = async () => {
       try {
-        const response = await fetch(URL, { signal: myAbortController.signal });
+        const response = await fetch(URL, {signal});
 
         const data = await response.json();
 
-        setData(data);
+        //Reverse the types's array
+        data.types.reverse();
+
+        setData(data)
       } catch (error) {
+        myAbortController.abort();
         setError(error);
       }
     };

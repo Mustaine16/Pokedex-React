@@ -1,69 +1,32 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { FILTER_GENERATION } from "../reducers/filterReducers";
 
 /*Hook para filtrar por Generacion */
 
-export const useFilterByGeneration = (localData) => {
-  const [generation, setGeneration] = useState(
-    Number(localStorage.getItem("generation")) || 1
+const useFilterByGeneration = dispatch => {
+  const [generationID, setGenerationID] = useState(
+    Number(localStorage.getItem("generationID")) || 1
   );
-  const [listByGeneration, setListByGeneration] = useState([]);
 
-  function handleByGeneration(event) {
+  function handleChangeGeneration(event) {
     const genSelected = Number(event.target.value);
-    setGeneration(genSelected);
-    localStorage.setItem("generation", genSelected);
+
+    setGenerationID(genSelected);
+
+    localStorage.setItem("generationID", genSelected);
   }
 
   useEffect(() => {
-    const filteredPokemons = filterByGeneration(generation);
+    dispatch({ type: FILTER_GENERATION, generationID });
 
-    function filterByGeneration(generation) {
-      let firstPkmnOfGeneration, lastPkmnOfGeneration;
+    //Setear como SELECTED al option correspondiente
+    document.querySelectorAll("option").forEach((option)=>Number(option.value) === generationID ? option.setAttribute("selected", ""): "")
+  }, [generationID, dispatch]);
 
-      switch (generation) {
-        case 1:
-          firstPkmnOfGeneration = 0;
-          lastPkmnOfGeneration = 150;
-          break;
-        case 2:
-          firstPkmnOfGeneration = 151;
-          lastPkmnOfGeneration = 250;
-          break;
-        case 3:
-          firstPkmnOfGeneration = 251;
-          lastPkmnOfGeneration = 385;
-          break;
-        case 4:
-          firstPkmnOfGeneration = 386;
-          lastPkmnOfGeneration = 492;
-          break;
-        case 5:
-          firstPkmnOfGeneration = 493;
-          lastPkmnOfGeneration = 648;
-          break;
-        case 6:
-          firstPkmnOfGeneration = 649;
-          lastPkmnOfGeneration = 720;
-          break;
-        case 7:
-          firstPkmnOfGeneration = 721;
-          lastPkmnOfGeneration = 806;
-          break;
-        default:
-          break;
-      }
-
-      const filteredPokemons = localData.filter(
-        (e, i) => i >= firstPkmnOfGeneration && i <= lastPkmnOfGeneration
-      );
-      return filteredPokemons;
-    }
-
-    setListByGeneration(filteredPokemons);
-  }, [generation]);
-
-  return [listByGeneration, handleByGeneration];
+  return handleChangeGeneration;
 };
+
+export { useFilterByGeneration };
 
 /* Componente */
 
@@ -72,7 +35,7 @@ export const useFilterByGeneration = (localData) => {
 /*
   @filteredList
   
-  This will be the DEFINITIVE LIST that is filtered by Generation, Name or Type
+  This will be the DEFINITIVE LIST that is filtered by generationID, Name or Type
 
   It will be affected by 3 different useEffect
 
@@ -86,7 +49,7 @@ export const useFilterByGeneration = (localData) => {
 //  const [listByType, handleByType] = useFilterByType();
 
 //  useEffect(() => {
-//    //By Generation
+//    //By generationID
 //    setFilteredList(listByGeneration);
 //  }, [listByGeneration]);
 

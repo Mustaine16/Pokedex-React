@@ -2,8 +2,9 @@ import React from "react";
 
 import PokemonCard from "./PokemonCard";
 
-function List(props) {
-  return props.filteredList.map(e => (
+function List({filteredList}) { 
+
+  return filteredList.map(e => (
     <PokemonCard data={e} key={e.id}></PokemonCard>
   ));
 }

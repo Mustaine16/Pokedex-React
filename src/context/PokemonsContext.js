@@ -1,10 +1,11 @@
-import React, { useState, useReducer, createContext } from "react";
+import React, {  useReducer, createContext } from "react";
 
-import {filteredReducer }from '../reducers/filterReducers'
-import localData from "../localData";
+import {filteredReducer, filterByGeneration }from '../reducers/filterReducers'
+
+//In the initalState, the list will be the filtered by 1°Generation
 
 const initialState = {
-  filteredList: [],
+  filteredList:filterByGeneration(1,{}).filteredList,
   loading: true
 };
 
@@ -15,7 +16,7 @@ const PokemonListProvider = props => {
   const [state, dispatch] = useReducer(filteredReducer, initialState)
 
   return (
-    <PokemonListContext.Provider value={"working"}>
+    <PokemonListContext.Provider value={[state,dispatch]}>
       {props.children}
     </PokemonListContext.Provider>
   );

@@ -1,21 +1,21 @@
+import  { useState, useEffect } from "react";
+import { FILTER_NAME } from "../reducers/filterReducers";
 
-  /*Hook filtrado por Nombre */
 
-  const useFilterByName = () => {
-    const [queryName, setQueryName] = useState("");
-    const [listByName, setListByName] = useState([]);
+/*Hook filtrado por Nombre */
 
-    function handleByName(event) {
-      setQueryName(event.target.value.toLowerCase());
-    }
+const useFilterByName = (dispatch) => {
+  const [queryName, setQueryName] = useState("");
 
-    const filterByName = React.useMemo(() => {
-      return localData.filter(e => e.name.startsWith(queryName));
-    }, [queryName]);
+  function handleChangeQuery(event) {
+    setQueryName(event.target.value.toLowerCase());
+  }
 
-    useEffect(() => {
-      setListByName(filterByName);
-    }, [filterByName]);
+  useEffect(() => {
+    dispatch({type:FILTER_NAME, query: queryName})
+  }, [queryName,dispatch]);
 
-    return [queryName, listByName, handleByName];
-  };
+  return handleChangeQuery;
+};
+
+export {useFilterByName}

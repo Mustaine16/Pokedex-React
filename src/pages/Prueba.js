@@ -3,9 +3,11 @@ import  PokemonListContext  from '../context/PokemonsContext';
 
 export default function Prueba(){
 
-  const value = useContext(PokemonListContext)
+  const [state, dispatch]= useContext(PokemonListContext)
+  console.log(state);
+  
 
   return(
-    <h1>{value}</h1>
+    <h1>"d"</h1>
   )
 }

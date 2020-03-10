@@ -1,17 +1,22 @@
-import React from "react";
+import React, {useContext} from "react";
+import PokemonListContext from '../../context/PokemonsContext'
 
 import List from "./List";
 import GenerationDropdown from "./GenerationDropdown";
-
 import pokeballMissing from "./img/pokeball-miss.png";
 
+
+
 const ListContainer = props => {
-  if (props.filteredList.length > 0) {
+  
+  const [state, dispatch] = useContext(PokemonListContext)
+  
+  if (state.filteredList.length > 0) {
     return (
       <main>
         <section className="pkmn-list">
-          <GenerationDropdown onChange={props.onChange} />
-          <List filteredList={props.filteredList} />
+          <GenerationDropdown dispatch={dispatch}/>
+          <List filteredList={state.filteredList}/>
         </section>
       </main>
     );

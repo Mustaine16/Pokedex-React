@@ -1,17 +1,17 @@
-import React, { useState, useEffect, useReducer, useContext } from "react";
+import React from "react";
 
 import Navbar from "../components/home/Navbar";
 import ListContainer from "../components/home/ListContainer";
-import {PokemonListProvider } from "../context/PokemonsContext";
-import Prueba from './Prueba'
+import { PokemonListProvider } from "../context/PokemonsContext";
 
 function Home() {
-  const initialState = []
-  return(
+  
+  return (
     <PokemonListProvider>
-      <Prueba/>
+      <Navbar></Navbar>
+      <ListContainer></ListContainer>
     </PokemonListProvider>
-  )
+  );
 }
 //   const initialState = { count: 0 , otro: 0};
 

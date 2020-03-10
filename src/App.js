@@ -11,8 +11,8 @@ function App() {
     <BrowserRouter>
       <Layout>
         <Switch>
-          <Route exact path="/" component={Home}></Route>
-          <Route exact path="/:id" component={PokemonPage}></Route>
+          <Route exact path={process.env.PUBLIC_URL + '/'} component={Home}></Route>
+          <Route exact path={process.env.PUBLIC_URL + '/' +':id'} component={PokemonPage}></Route>
         </Switch>
       </Layout>
     </BrowserRouter>

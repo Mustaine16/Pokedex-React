@@ -1,6 +1,6 @@
-import React from "react";
+import React, {useContext} from "react";
 
-// import PokemonListContext from '../../context/PokemonsContext'
+import PokemonListContext from '../../context/PokemonsContext'
 
 import {useFilterByGeneration} from '../../hooks/useFilterGeneration'
 
@@ -8,8 +8,10 @@ import "./styles/GenerationDropdown.css";
 
 
 
-function GenerationDropdown({dispatch}) {
-  console.log("ff");
+function GenerationDropdown(props) {
+
+  const [state, dispatch] = useContext(PokemonListContext)
+
   
   const handleChangeGeneration = useFilterByGeneration(dispatch)
 

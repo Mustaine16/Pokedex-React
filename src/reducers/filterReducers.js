@@ -24,8 +24,6 @@ export const filteredReducer = (state, action) => {
 
 //Filter by Generation
 export function filterByGeneration(generationID, state) {
-  console.log("GENERATION");
-  
   let firstPkmnOfGeneration, lastPkmnOfGeneration;
   switch (generationID) {
     case 1:
@@ -71,13 +69,13 @@ export function filterByGeneration(generationID, state) {
 function filterByName(query, state) {
 
   if (query) {
-    console.log("query", query);
-    
     const filterPokemons = localData.filter(e => e.name.startsWith(query));
     return { ...state, filteredList: filterPokemons };
   } else {
-    console.log("aaaaa");
-
+    return filterByGeneration(
+      Number(localStorage.getItem("generationID")) || 1,
+      state
+    );
   }
 
 }

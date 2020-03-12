@@ -1,9 +1,9 @@
-
 import localData from "../localData";
 
 export const LOADING = "LOADING";
 export const FILTER_GENERATION = "FILTER_GENERATION";
 export const FILTER_NAME = "FILTER_NAME";
+export const FILTER_TYPE = "FILTER_TYPE";
 
 //Reducer
 export const filteredReducer = (state, action) => {
@@ -12,11 +12,14 @@ export const filteredReducer = (state, action) => {
       return { ...state, loading: true };
 
     case FILTER_GENERATION:
+
       return filterByGeneration(action.generationID, state);
 
     case FILTER_NAME:
       return filterByName(action.query, state);
 
+    case FILTER_TYPE:
+      return filterByType(action.queryType, state);
     default:
       return { ...state };
   }
@@ -67,15 +70,26 @@ export function filterByGeneration(generationID, state) {
 
 //Filter by Name
 function filterByName(query, state) {
-
   if (query) {
-    const filterPokemons = localData.filter(e => e.name.startsWith(query));
-    return { ...state, filteredList: filterPokemons };
+    const filteredPokemons = localData.filter(e => e.name.startsWith(query));
+    return { ...state, filteredList: filteredPokemons };
   } else {
     return filterByGeneration(
       Number(localStorage.getItem("generationID")) || 1,
       state
     );
   }
+}
 
+//Filter by Type
+function filterByType(queryType, state) {
+
+  const filteredPokemons = localData.filter(pkmn => {
+    return pkmn.types.length > 1
+      ? pkmn.types[0].type.name === queryType ||
+          pkmn.types[1].type.name === queryType
+      : pkmn.types[0].type.name === queryType;
+  });
+
+  return { ...state, filteredList: filteredPokemons };
 }

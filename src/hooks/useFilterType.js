@@ -1,28 +1,21 @@
-  /*Hook filtrado por Tipo */
+import { useState, useEffect } from "react";
+import {FILTER_TYPE} from "../reducers/filterReducers"
 
-  const useFilterByType = () => {
-    const [queryType, setQueryType] = useState();
-    const [listByType, setListByType] = useState([]);
+/*Hook filtrado por Tipo */
 
-    function handleByType(event) {
-      const typeSelected = event.target.dataset.value;
-      setQueryType(typeSelected);
-    }
+const useFilterByTypes = (dispatch) => {
+  const [queryType, setQueryType] = useState();
 
-    const filterByType = React.useMemo(() => {
-      const filtered = localData.filter(pkmn => {
-        return pkmn.types.length > 1
-          ? pkmn.types[0].type.name === queryType ||
-              pkmn.types[1].type.name === queryType
-          : pkmn.types[0].type.name === queryType;
-      });
+  function handleFilterType(event) {
+    const typeSelected = event.target.dataset.value;
+    setQueryType(typeSelected);
+  }
 
-      return filtered;
-    }, [queryType]);
+  useEffect(() => {  
+    dispatch({type:FILTER_TYPE, queryType})
+  }, [queryType, dispatch]);
 
-    useEffect(() => {
-      setListByType(filterByType);
-    }, [filterByType]);
+  return handleFilterType;
+};
 
-    return [listByType, handleByType];
-  };
+export {useFilterByTypes}

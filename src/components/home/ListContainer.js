@@ -1,5 +1,4 @@
 import React from "react";
-import PokemonListContext from "../../context/PokemonsContext";
 
 import List from "./List";
 import GenerationDropdown from "./GenerationDropdown";

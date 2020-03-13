@@ -5,7 +5,7 @@ import PokemonCard from "./PokemonCard";
 import pokeballMissing from "./img/pokeball-miss.png";
 
 function List() {
-  const [state] = useContext(PokemonListContext);
+  const {state} = useContext(PokemonListContext);
   console.log(state);
 
   if (state.filteredList.length > 0) {

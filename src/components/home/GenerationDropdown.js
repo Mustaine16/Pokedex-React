@@ -1,22 +1,25 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 
-import PokemonListContext from '../../context/PokemonsContext'
+import PokemonListContext from "../../context/PokemonsContext";
 
-import {useFilterByGeneration} from '../../hooks/useFilterGeneration'
+ import {useFilterByGeneration} from '../../hooks/useFilterGeneration'
 
 import "./styles/GenerationDropdown.css";
 
+function GenerationDropdown() {
+  const {
+    actions: { filterByGeneration }
+  } = useContext(PokemonListContext);
 
-
-function GenerationDropdown(props) {
-
-  const [state, dispatch] = useContext(PokemonListContext)
-
-  
-  const handleChangeGeneration = useFilterByGeneration(dispatch)
+  const handleChangeGeneration = useFilterByGeneration(filterByGeneration)
 
   return (
-    <select onChange={(event)=>handleChangeGeneration(event)} className="gen-name">   
+    <select
+      onChange={event => {
+        handleChangeGeneration(event);
+      }}
+      className="gen-name"
+    >
       <option value="1">1° Gen</option>
       <option value="2">2° Gen</option>
       <option value="3">3° Gen</option>

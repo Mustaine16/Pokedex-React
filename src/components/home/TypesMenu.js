@@ -2,14 +2,14 @@ import React, { useState, useContext } from "react";
 
 import PokemonListContext from '../../context/PokemonsContext'
 
-import {useFilterByTypes} from '../../hooks/useFilterType'
+export default function TypesMenu() {
 
-export default function TypesMenu(props) {
-  const [state, dispatch] = useContext(PokemonListContext)
+  const {actions:{filterByType}} = useContext(PokemonListContext)
+
   const [open, setOpen] = useState(false);
-  const handleFilterByType = useFilterByTypes(dispatch)
+
   const types = [
-    "all",
+    "reset",
     "grass",
     "water",
     "fire",
@@ -41,19 +41,22 @@ export default function TypesMenu(props) {
         className={open ? "search-types search-types-active" : "search-types"}
       >
         <span>By Types</span>
+
+        {/* TYPES LIST */}
+
         <ul className="search-types-list">
           {types.map((type) => {
             return (
               <li
                 key={type + "filter"}
                 onClick={(event)=>{
-                  handleFilterByType(event)
+                  filterByType(event)
                   setOpen(false)
                 }}
                 data-value={type}
                 className={type}
               >
-                {type}
+                {type.toUpperCase()}
               </li>
             );
           })}

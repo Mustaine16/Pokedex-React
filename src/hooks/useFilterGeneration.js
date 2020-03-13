@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
-import { FILTER_GENERATION } from "../reducers/filterReducers";
 
 /*Hook para filtrar por Generacion */
 
-const useFilterByGeneration = dispatch => {
+const useFilterByGeneration = filterByGeneration => {
   const [generationID, setGenerationID] = useState(
     Number(localStorage.getItem("generationID")) || 1
   );
@@ -17,11 +16,12 @@ const useFilterByGeneration = dispatch => {
   }
 
   useEffect(() => {
-    dispatch({ type: FILTER_GENERATION, generationID });
 
+    filterByGeneration(generationID );
     //Setear como SELECTED al option correspondiente
     document.querySelectorAll("option").forEach((option)=>Number(option.value) === generationID ? option.setAttribute("selected", ""): "")
-  }, [generationID, dispatch]);
+
+  }, [generationID]);
 
   return handleChangeGeneration;
 };

@@ -6,9 +6,9 @@ import {useFilterByName} from '../../hooks/useFilterName'
 
 function SearchMenu() {
 
-  const [state, dispatch] = useContext(PokemonListContext)
+  const {actions:{filterByName}} = useContext(PokemonListContext)
 
-  const handleChangeQuery = useFilterByName(dispatch)
+  const handleChangeQuery = useFilterByName(filterByName)
 
   return (
     <div className="search-text">

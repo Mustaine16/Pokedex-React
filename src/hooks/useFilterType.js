@@ -3,7 +3,7 @@ import {FILTER_TYPE} from "../reducers/filterReducers"
 
 /*Hook filtrado por Tipo */
 
-const useFilterByTypes = (dispatch) => {
+const useFilterByTypes = (filterByType) => {
   const [queryType, setQueryType] = useState();
 
   function handleFilterType(event) {
@@ -12,8 +12,8 @@ const useFilterByTypes = (dispatch) => {
   }
 
   useEffect(() => {  
-    dispatch({type:FILTER_TYPE, queryType})
-  }, [queryType, dispatch]);
+    filterByType( queryType)
+  }, [queryType]);
 
   return handleFilterType;
 };

@@ -5,9 +5,9 @@ import { PokemonProvider, PokemonContext } from "../context/PokemonContext";
 import Header from "../components/pokemonPage/Header";
 import DataContainer from "../components/pokemonPage/containers/DataContainer";
 
-function PokemonPage(props) {
+function PokemonPage({location:{backgroundType}}) {
   return (
-    <PokemonProvider>
+    <PokemonProvider backgroundType={backgroundType}>
       <Header></Header>
       <DataContainer></DataContainer>
     </PokemonProvider>

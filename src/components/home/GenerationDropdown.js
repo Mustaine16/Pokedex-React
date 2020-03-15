@@ -1,34 +1,42 @@
-import React, { useContext } from "react";
+import React, { useEffect, useContext } from "react";
 
 import PokemonListContext from "../../context/HomeContext";
 
- import {useFilterByGeneration} from '../../hooks/useFilterGeneration'
+import { useFilterByGeneration } from "../../hooks/useFilterGeneration";
 
 import "./styles/GenerationDropdown.css";
 
 function GenerationDropdown() {
   const {
-    actions: { filterByGeneration }
+    actions: { filterByGeneration },
+    state: { filter }
   } = useContext(PokemonListContext);
 
-  const handleChangeGeneration = useFilterByGeneration(filterByGeneration)
-
-  return (
-    <select
-      onChange={event => {
-        handleChangeGeneration(event);
-      }}
-      className="gen-name"
-    >
-      <option value="1">1° Gen</option>
-      <option value="2">2° Gen</option>
-      <option value="3">3° Gen</option>
-      <option value="4">4° Gen</option>
-      <option value="5">5° Gen</option>
-      <option value="6">6° Gen</option>
-      <option value="7">7° Gen</option>
-    </select>
+  const [generationID, handleChangeGeneration] = useFilterByGeneration(
+    filterByGeneration
   );
+
+  if (filter === "GENERATION") {
+    return (
+      <select
+        onChange={event => {
+          handleChangeGeneration(event);
+        }}
+        className="gen-name"
+      >
+        {[ 1,2,3,4,5,6,7 ].map((gen) => {
+          if(generationID === gen){
+            return <option value={gen} selected>{gen}° Gen</option>
+          } else{
+            return <option value={gen}>{gen}° Gen</option>;
+          }
+        })}
+
+      </select>
+    );
+  } else {
+    return false;
+  }
 }
 
 export default GenerationDropdown;

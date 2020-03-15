@@ -1,8 +1,10 @@
 import React, { useReducer, createContext } from "react";
 import localData from "../localData";
+import Loader from "../components/commons/Loader"
 
 export const INIT_FILTER = "INIT_FILTER";
 export const FILTERED_BY = "FILTERED_BY";
+
 
 //In the initalState, the list will be the filtered by 1°Generation
 
@@ -102,6 +104,7 @@ const PokemonListProvider = ({ children }) => {
 
   //Filter by Name
   function filterByName(query) {
+    console.log("ffff");
     
     dispatch({ type: INIT_FILTER });
 
@@ -155,6 +158,7 @@ const PokemonListProvider = ({ children }) => {
     filterByGeneration(Number(localStorage.getItem("generationID")) ||  1);
   }
 
+  
   return (
     <PokemonListContext.Provider
       value={{
@@ -166,7 +170,7 @@ const PokemonListProvider = ({ children }) => {
         }
       }}
     >
-      {state.loading ? "LOADING" : children}
+      {state.loading ? <Loader background="default"/> : children}
     </PokemonListContext.Provider>
   );
 };

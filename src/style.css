@@ -1,8 +1,7 @@
 * {
-  /* font-family: 'Lato', sans-serif;
-   */
+  /* font-family: 'Lato', sans-serif;  */
   font-family: "Poppins", sans-serif;
-  /* color: whitesmoke; */
+  color: whitesmoke;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -73,6 +72,7 @@ html,
 body {
   /* height: 100%; */
   overflow-x: hidden;
+  background: #f2f2f2;
 }
 
 .modal::-webkit-scrollbar {
@@ -111,7 +111,6 @@ body {
 }
 
 main {
-  background: #f2f2f2;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -119,7 +118,7 @@ main {
 }
 
 .header-sticky {
-  position: sticky;
+  position: fixed;
   top: 0;
   z-index: 5;
 }
@@ -137,13 +136,19 @@ main {
 
 .search-types {
   position: absolute;
-  text-align: center;
-  background-color: var(--nav-bar);
+  top: 60px;
+  display: flex;
+  flex-direction: column;
   width: 65vw;
-  top: 8vh;
+  height: 100vh;
+  background-color: var(--nav-bar);
+  text-align: center;
   transform: translateX(-100vw);
   transition: all 0.3s;
-  height: 84vh;
+}
+
+.search-types  span{
+  padding: .5em;
 }
 
 .search-types-list {
@@ -160,10 +165,10 @@ main {
 
 .search-types-list {
   display: flex;
-  justify-content: space-around;
-  /* align-content: space-around; */
   flex-wrap: wrap;
-  height: 94%;
+  justify-content: space-around;
+  height: 75%;
+  /* padding-bottom: 3em; */
   overflow-y: scroll;
   scroll-behavior: smooth;
 }
@@ -183,12 +188,8 @@ main {
   transform: scale(1.1);
 }
 
-.allTypes {
-  /* width: 56% !important; */
-  margin: auto;
-}
-
-.allTypes {
+/* Reset types button */
+.reset  {
   /* display: inline-block; */
   /* width: 100%; */
   /* padding: 0 5em; */
@@ -254,7 +255,7 @@ main {
   border-bottom: 1px solid whitesmoke;
   outline: none;
   /* border-radius: 10px; */
-  padding: 0.5em 1em;
+  padding: 0.5em;
   width: 85%;
 }
 
@@ -347,12 +348,12 @@ main {
 .pkmn-list {
   display: grid;
   width: 100vw;
-  /* margin-top: 7em; */
+  margin-top: 70px;
   margin-right: auto;
   margin-left: auto;
   grid-template-columns: repeat(2, 1fr);
   gap: 1em;
-  padding: 1em 0;
+
   /* margin-bottom: 1em; */
   /* min-height: 20vh; */
   /* max-height: 100vh; */
@@ -362,11 +363,11 @@ main {
 .pkmn-card {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  /* justify-content: space-between; */
   align-items: center;
   /* position: relative; */
-  height: 144px;
-  width: 40vw;
+  height: 170px;
+  width: 140px;
   margin-right: auto;
   margin-left: auto;
   overflow: hidden;
@@ -430,7 +431,7 @@ img {
   width: 100%;
   margin-bottom: 10px;
   padding: 0.5em;
-  border-radius: 3em 3em 0em 0em;
+  /* border-radius: 3em 3em 0em 0em; */
   font-size: 0.9em;
   pointer-events: none;
 }
@@ -441,7 +442,8 @@ img {
 }
 .electric p,
 .electric span,
-.electric .empty {
+.electric .empty,
+.electric figcaption {
   color: rgb(71, 71, 71);
 }
 .electric .counter {
@@ -507,6 +509,13 @@ img {
   background: var(--ice-bg);
   border: var(--ice-border);
   color: white;
+}
+
+.ice .description,
+.ice .info-boxes span,
+.ice .empty,
+.ice figcaption {
+  color: rgb(71, 71, 71);
 }
 
 .dark {
@@ -712,6 +721,9 @@ img {
 }
 
 .modal-loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100vw;
   height: 100vh;
   z-index: 2000;
@@ -721,6 +733,10 @@ img {
   transition: all 0.3s;
 }
 
+.modal-loader-container.default{
+  background: #ef5350
+}
+
 .modal-loader {
   border: 16px solid #f1f1f1; /* Light grey */
   border-top: 16px solid #2e2b2b; /* Blue */
@@ -728,7 +744,6 @@ img {
   width: 100px;
   height: 100px;
   animation: spin 0.5s linear infinite;
-  margin: auto;
   z-index: 2000;
   transition: all 0.3s;
 }
@@ -769,9 +784,7 @@ img {
 }
 
 .asset {
-  position: relative;
   margin: auto;
-  margin-bottom: 8px;
 }
 
 .asset img:nth-child(1) {
@@ -937,7 +950,8 @@ img {
 }
 
 .ev img {
-  height: 80px;
+  max-width: 100%;
+  max-height: 115px;
 }
 
 .evolutions-title,
@@ -1130,7 +1144,7 @@ img {
   flex-flow: column;
   justify-content: space-evenly;
   align-content: center;
-  height: 86vh;
+  height: 500px;
   width: 100vw;
   background: #ef5350;
   border-top: 1em solid #3f3f3f;

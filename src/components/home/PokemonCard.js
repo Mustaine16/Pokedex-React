@@ -1,11 +1,14 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link , Redirect} from "react-router-dom";
 
 import Sprite from "./Sprite";
 
 const PokemonCard = ({ pokemon }) => {
   return (
-    <Link to={`${pokemon.id}`}>
+    <Link to={{
+      pathname: `${pokemon.id}`,
+      backgroundType: pokemon.types[0].type.name
+    }}>
       <article
         className={`${
           pokemon.types[1] ? pokemon.types[1].type.name : pokemon.types[0].type.name

@@ -1,5 +1,8 @@
 import React, { useReducer, useEffect, createContext } from "react";
 import { useParams } from "react-router-dom";
+import Loader from "../components/commons/Loader";
+
+export const SET_BACKGROUND = "SET_BACKGROUND";
 export const INIT_FETCH = "INIT_FETCH";
 export const FETCH_POKEMON_OK = "FETCH_POKEMON_OK";
 export const FETCH_DETAILS_OK = "FETCH_DETAILS_OK";
@@ -10,9 +13,10 @@ export const FETCH_ERROR = "FETCH_ERROR";
 //INITAL STATE
 
 const initialState = {
-  pokemon: {},
-  details: {},
-  evolutionsData: {},
+  pokemon: "",
+  details: "",
+  evolutionsData: "",
+  background: "",
   loading: true,
   error: false,
   tab: ""
@@ -23,6 +27,8 @@ const PokemonContext = createContext(initialState);
 //REDUCER
 const reducer = (state, action) => {
   switch (action.type) {
+    case SET_BACKGROUND:
+      return { ...state, background: action.payload };
 
     case INIT_FETCH:
       return { ...state, loading: true };
@@ -62,40 +68,39 @@ const PokemonContextProvider = props => {
     const signal = myAbortController.signal;
 
     const fetchPokemon = async () => {
-
+      // dispatch({type:SET_BACKGROUND, payload:props.backgroundType})
       dispatch({ type: INIT_FETCH });
 
       const POKEMON_URL = `https://pokeapi.co/api/v2/pokemon/${id}`;
       const DETAIL_URL = `https://pokeapi.co/api/v2/pokemon-species/${id}/`;
 
       try {
-
-        //Fetch Pokemon and Details 
+        //Fetch Pokemon and Details
         const pokemonResponse = await fetch(POKEMON_URL, { signal });
         const detailsResponse = await fetch(DETAIL_URL, { signal });
-        
+
         const pokemon = await pokemonResponse.json();
         const details = await detailsResponse.json();
 
         //Take the evo chain URL
         //Then, fetch evo data
-        
-        const EVO_URL = details.evolution_chain.url
-        const evolutionsResponse = await fetch(EVO_URL,{signal});
+
+        const EVO_URL = details.evolution_chain.url;
+        const evolutionsResponse = await fetch(EVO_URL, { signal });
         const evolutionsData = await evolutionsResponse.json();
 
         //Reverse the types's array
         await pokemon.types.reverse();
-        
-        dispatch({ type: FETCH_POKEMON_OK, payload: pokemon });
-        dispatch({ type: FETCH_DETAILS_OK, payload: details });
-        dispatch({ type: FETCH_EVOLUTIONS_OK, payload: evolutionsData });
-        dispatch({ type: FETCH_COMPLETE });
-        
 
+        dispatch({ type: FETCH_POKEMON_OK, payload: pokemon });
+        setTimeout(() => {
+          dispatch({ type: FETCH_DETAILS_OK, payload: details });
+          dispatch({ type: FETCH_EVOLUTIONS_OK, payload: evolutionsData });
+          dispatch({ type: FETCH_COMPLETE });
+        }, 1000);
       } catch (error) {
         console.log(error);
-        
+
         myAbortController.abort();
         dispatch({ type: FETCH_ERROR, error });
       }
@@ -109,13 +114,14 @@ const PokemonContextProvider = props => {
     };
   }, [id]);
 
-
   /*
    *RENDERS
    */
 
   //LOADING
-  if (state.loading) return <h1>CARGANDO</h1>;
+  if (state.loading && state.pokemon)
+    return <Loader background={state.pokemon.types[0].type.name} />;
+  if (state.loading) return <Loader background={props.backgroundType ?props.backgroundType : "default"} />;
 
   //ERROR
   if (state.error) return <h1>{state.error.message}</h1>;

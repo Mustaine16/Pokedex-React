@@ -19,11 +19,11 @@ const useFilterByGeneration = filterByGeneration => {
 
     filterByGeneration(generationID );
     //Setear como SELECTED al option correspondiente
-    document.querySelectorAll("option").forEach((option)=>Number(option.value) === generationID ? option.setAttribute("selected", ""): "")
+    // document.querySelectorAll("option").forEach((option)=>Number(option.value) === generationID ? option.setAttribute("selected", ""): "")
 
   }, [generationID]);
 
-  return handleChangeGeneration;
+  return [generationID, handleChangeGeneration];
 };
 
 export { useFilterByGeneration };

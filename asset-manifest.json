@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/Pokedex-React/static/css/main.0b26aa4f.chunk.css",
-    "main.js": "/Pokedex-React/static/js/main.ddcb4c02.chunk.js",
-    "main.js.map": "/Pokedex-React/static/js/main.ddcb4c02.chunk.js.map",
+    "main.css": "/Pokedex-React/static/css/main.ab442b5c.chunk.css",
+    "main.js": "/Pokedex-React/static/js/main.cedcbfa8.chunk.js",
+    "main.js.map": "/Pokedex-React/static/js/main.cedcbfa8.chunk.js.map",
     "runtime-main.js": "/Pokedex-React/static/js/runtime-main.32dca872.js",
     "runtime-main.js.map": "/Pokedex-React/static/js/runtime-main.32dca872.js.map",
-    "static/js/2.f6084003.chunk.js": "/Pokedex-React/static/js/2.f6084003.chunk.js",
-    "static/js/2.f6084003.chunk.js.map": "/Pokedex-React/static/js/2.f6084003.chunk.js.map",
+    "static/js/2.2c1ed96a.chunk.js": "/Pokedex-React/static/js/2.2c1ed96a.chunk.js",
+    "static/js/2.2c1ed96a.chunk.js.map": "/Pokedex-React/static/js/2.2c1ed96a.chunk.js.map",
     "index.html": "/Pokedex-React/index.html",
-    "precache-manifest.e074eecad6393f312184f58521d75637.js": "/Pokedex-React/precache-manifest.e074eecad6393f312184f58521d75637.js",
+    "precache-manifest.c145cd63b1fe454ba433658f27545494.js": "/Pokedex-React/precache-manifest.c145cd63b1fe454ba433658f27545494.js",
     "service-worker.js": "/Pokedex-React/service-worker.js",
-    "static/css/main.0b26aa4f.chunk.css.map": "/Pokedex-React/static/css/main.0b26aa4f.chunk.css.map",
-    "static/js/2.f6084003.chunk.js.LICENSE": "/Pokedex-React/static/js/2.f6084003.chunk.js.LICENSE"
+    "static/css/main.ab442b5c.chunk.css.map": "/Pokedex-React/static/css/main.ab442b5c.chunk.css.map",
+    "static/js/2.2c1ed96a.chunk.js.LICENSE": "/Pokedex-React/static/js/2.2c1ed96a.chunk.js.LICENSE"
   },
   "entrypoints": [
     "static/js/runtime-main.32dca872.js",
-    "static/js/2.f6084003.chunk.js",
-    "static/css/main.0b26aa4f.chunk.css",
-    "static/js/main.ddcb4c02.chunk.js"
+    "static/js/2.2c1ed96a.chunk.js",
+    "static/css/main.ab442b5c.chunk.css",
+    "static/js/main.cedcbfa8.chunk.js"
   ]
 }

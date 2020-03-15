@@ -1,6 +1,6 @@
 import React, {useContext} from "react";
 
-import PokemonListContext from '../../context/PokemonsContext'
+import PokemonListContext from '../../context/HomeContext'
 
 import {useFilterByName} from '../../hooks/useFilterName'
 

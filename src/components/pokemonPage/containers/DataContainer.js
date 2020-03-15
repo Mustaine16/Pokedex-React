@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { PokemonContext } from "../../../context/PokemonContext";
 
 import TabMenu from "../TabMenu";
 import Description from "../Description";
@@ -8,63 +9,22 @@ import Evolutions from "../Evolutions";
 import "../css/DataContainer.css";
 import Stats from "../Stats";
 
-function DataContainer({ data }) {
-  const [description, setDescription] = useState([]);
-  const { types } = data;
-  const [state, setState] = useState({
-    loading: true,
-    error: false
-  });
+function DataContainer() {
+  const {
+    state,
+    state: { pokemon, details }
+  } = useContext(PokemonContext);
 
-  useEffect(() => {
-    const URL = `https://pokeapi.co/api/v2/pokemon-species/${data.id}/`;
+  const { types, stats, weight, height } = pokemon;
 
-    //Abort fetch
-    const myAbortController = new AbortController();
-    const signal = myAbortController.signal;
+  const description = details["flavor_text_entries"].filter(
+    e => e.language.name === "en"
+  )[0]["flavor_text"];
 
-    const speciesDataFetched = async () => {
-
-      setState({
-        loading: true,
-        error: false
-      });
-
-      try {
-
-        const data = await fetch(URL, { signal });
-        const result = await data.json();
-
-        setDescription(
-          result["flavor_text_entries"].filter(
-            e => e.language.name === "en"
-          )[0]["flavor_text"]
-        );
-        setState({
-          loading: false,
-          error: false
-        });
-
-      } catch (error) {
-        return "error";
-      }
-    };
-    speciesDataFetched();
-
-    //Clean async call
-    return () => {
-      myAbortController.abort();
-    };
-  }, [description, data]);
-
-  if (state.loading) {
-    return (
-      <section className="tabs">
-        <p>Loading</p>
-      </section>
-    );
+  {
+    console.log(state);
   }
-  console.table(types);
+
   return (
     <section
       className={`tabs ${types[1] ? types[1].type.name : types[0].type.name}`}
@@ -74,12 +34,12 @@ function DataContainer({ data }) {
       <div className="container">
         <Description
           description={description}
-          weight={data.weight}
-          height={data.height}
+          weight={weight}
+          height={height}
         />
-        <Stats stats={data.stats} types={data.types}></Stats>
+        <Stats stats={stats} types={types}></Stats>
 
-        <DamageContainer types={data.types}></DamageContainer>
+        <DamageContainer types={types}></DamageContainer>
 
         <Evolutions></Evolutions>
       </div>

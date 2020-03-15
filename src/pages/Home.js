@@ -2,7 +2,7 @@ import React from "react";
 
 import Navbar from "../components/home/Navbar";
 import ListContainer from "../components/home/ListContainer";
-import { PokemonListProvider } from "../context/PokemonsContext";
+import { PokemonListProvider } from "../context/HomeContext";
 
 function Home() {
   

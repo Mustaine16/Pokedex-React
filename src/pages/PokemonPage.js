@@ -1,54 +1,16 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useContext, Fragment } from "react";
+
+import { PokemonProvider, PokemonContext } from "../context/PokemonContext";
 
 import Header from "../components/pokemonPage/Header";
 import DataContainer from "../components/pokemonPage/containers/DataContainer";
 
 function PokemonPage(props) {
-  const [data, setData] = useState();
-  const [error, setError] = useState(false);
-
-  useEffect(() => {
-    const pokemonID = props.match.params.id;
-    const URL = `https://pokeapi.co/api/v2/pokemon/${pokemonID}`;
-    
-    const myAbortController = new AbortController();
-    const signal = myAbortController.signal
-
-    const fetchData = async () => {
-      try {
-        const response = await fetch(URL, {signal});
-
-        const data = await response.json();
-
-        //Reverse the types's array
-        data.types.reverse();
-
-        setData(data)
-      } catch (error) {
-        myAbortController.abort();
-        setError(error);
-      }
-    };
-    fetchData();
-    //Clean async call
-    return () => {
-      myAbortController.abort();
-    };
-  }, [props.match.params.id]);
-
-  if (!data) {
-    return "loading";
-  }
-
-  if (error) {
-    return error;
-  }
-
   return (
-    <Fragment>
-      <Header name={data.name} id={data.id} types={data.types}></Header>
-      <DataContainer data={data}></DataContainer>
-    </Fragment>
+    <PokemonProvider>
+      <Header></Header>
+      <DataContainer></DataContainer>
+    </PokemonProvider>
   );
 }
 

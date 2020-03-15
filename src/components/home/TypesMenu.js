@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 
-import PokemonListContext from '../../context/PokemonsContext'
+import PokemonListContext from '../../context/HomeContext'
 
 export default function TypesMenu() {
 

@@ -38,7 +38,6 @@ export default function DamageRelations({ data, types }) {
 
             <div className="offensive-container-by-types">
               {attack.map((type, i) => {
-                console.log(type);
                 
                 return (
                   <DamageCard
@@ -48,6 +47,7 @@ export default function DamageRelations({ data, types }) {
                     key={Math.random()}
                   />
                 );
+                
               })}
             </div>
           </div>

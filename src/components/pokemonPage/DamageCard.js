@@ -8,8 +8,6 @@ export default function DamageCard({
   index,
   relation
 }) {
-  console.log(types);
-
   const TypesTitle = () => {
     //Defense Title
     if (relation === "defense") {

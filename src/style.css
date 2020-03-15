@@ -784,7 +784,7 @@ img {
 }
 
 .sprite-and-type .asset img:nth-child(1):hover,
-.ev img:hover {
+.evs-list .ev img:hover {
   cursor: pointer;
   filter: drop-shadow(3px 3px 3px #222);
   animation: move linear 0.6s;
@@ -928,7 +928,7 @@ img {
   padding: 0.2rem;
 }
 
-.ev {
+.evs-list .ev {
   display: flex;
   flex-direction: column;
   justify-content: center;

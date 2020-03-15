@@ -97,19 +97,19 @@ export default function DamageContainer(props) {
                       //calculatedDamage.defense.double.push(e)
                       calculatedDamage.defense[1].double.push(e);
                     })
-                  : console.log("none double");
+                  :console.log()
                 defHalfArr.length > 0
                   ? defHalfArr.forEach(e => {
                       // calculatedDamage.defense.half.push(e)
                       calculatedDamage.defense[2].half.push(e);
                     })
-                  : console.log("none half");
+                  :console.log()
                 defNoneArr.length > 0
                   ? defNoneArr.forEach(e => {
                       // calculatedDamage.defense.none.push(e)
                       calculatedDamage.defense[4].none.push(e);
                     })
-                  : console.log("none none");
+                  :console.log()
               }
             } else {
               //Double
@@ -131,31 +131,31 @@ export default function DamageContainer(props) {
                 ? defQuadrupleArr.forEach(e =>
                     calculatedDamage.defense[0].quadruple.push(e)
                   )
-                : console.log("none Quadruple");
+                :console.log()
               //X2
               defDbArr.length > 0
                 ? defDbArr.forEach(e =>
                     calculatedDamage.defense[1].double.push(e)
                   )
-                : console.log("none double");
+                :console.log()
               //X0.5
               defHalfArr.length > 0
                 ? defHalfArr.forEach(e =>
                     calculatedDamage.defense[2].half.push(e)
                   )
-                : console.log("none half");
+                :console.log()
               //0.25
               defQuarterArr.length > 0
                 ? defQuarterArr.forEach(e =>
                     calculatedDamage.defense[3].quarter.push(e)
                   )
-                : console.log("none quarter");
+                :console.log()
               //X0
               defNoneArr.length > 0
                 ? defNoneArr.forEach(e =>
                     calculatedDamage.defense[4].none.push(e)
                   )
-                : console.log("none none");
+                :console.log()
             }
           });
       }

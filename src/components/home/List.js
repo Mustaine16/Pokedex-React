@@ -1,16 +1,15 @@
 import React, { useContext } from "react";
-import PokemonListContext from "../../context/PokemonsContext";
+import PokemonListContext from "../../context/HomeContext";
 
 import PokemonCard from "./PokemonCard";
 import pokeballMissing from "./img/pokeball-miss.png";
 
 function List() {
-  const {state} = useContext(PokemonListContext);
-  console.log(state);
+  const {state:{filteredList}} = useContext(PokemonListContext);
 
-  if (state.filteredList.length > 0) {
-    return state.filteredList.map(e => (
-      <PokemonCard data={e} key={e.id}></PokemonCard>
+  if (filteredList.length > 0) {
+    return filteredList.map(e => (
+      <PokemonCard pokemon={e} key={e.id}></PokemonCard>
     ));
   } else {
     return (

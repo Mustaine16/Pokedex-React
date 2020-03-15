@@ -1,8 +1,8 @@
 import React from "react";
 
-const Sprite = ({ id, name }) => {
+const Sprite = ({ id, name, showCaption = false }) => {
   return (
-    <figure className="asset">
+    <figure className="asset ev">
       <img
         src={`${
           id < 722
@@ -14,6 +14,8 @@ const Sprite = ({ id, name }) => {
         alt={name}
         loading="lazy"
       />
+      {/* Show caption in Evolution Row */}
+     { showCaption && <figcaption>{name}</figcaption>}
     </figure>
   );
 };

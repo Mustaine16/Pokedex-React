@@ -3,38 +3,21 @@ import { Link } from "react-router-dom";
 
 import Sprite from "./Sprite";
 
-const PokemonCard = ({ data }) => {
+const PokemonCard = ({ pokemon }) => {
   return (
-    <Link to={`${data.id}`}>
+    <Link to={`${pokemon.id}`}>
       <article
         className={`${
-          data.types[1] ? data.types[1].type.name : data.types[0].type.name
+          pokemon.types[1] ? pokemon.types[1].type.name : pokemon.types[0].type.name
         } pkmn-card`}
-        data-name={data.name}
-        data-type1={data.type1}
-        data-type2={data.type2}>
-        <h3 className="pkmn-name">{data.name}</h3>
-        <Sprite id={data.id} name={data.name}></Sprite>
+        pokemon-name={pokemon.name}
+        pokemon-type1={pokemon.type1}
+        pokemon-type2={pokemon.type2}>
+        <h3 className="pkmn-name">{pokemon.name}</h3>
+        <Sprite id={pokemon.id} name={pokemon.name}></Sprite>
       </article>
     </Link>
   );
 };
 
 export default PokemonCard;
-
-// <main>
-// <section className="pkmn-list">
-//   {localData.map((e, i) => (
-//     <PokemonCard data={state[i]} key={state[i].id}></PokemonCard>
-//   ))}
-// </section>
-// </main>
-
-// <button
-// onClick={() => {
-//   setGen(gen === 7 ? 1 : gen + 1);
-
-//   setState([]);
-// }}>
-// Click!
-// </button>

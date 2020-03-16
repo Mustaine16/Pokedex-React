@@ -14,7 +14,7 @@ function List() {
   } else {
     return (
       <>
-        <figure className="">
+        <figure className="pokemon-missing">
           <img src={pokeballMissing} alt="pokemon-missing" />
           <p>I don't think that pokemon does exist, try again!</p>
         </figure>

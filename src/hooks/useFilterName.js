@@ -5,15 +5,15 @@ import  { useState, useEffect } from "react";
 const useFilterByName = (dispatch) => {
   const [queryName, setQueryName] = useState("");
 
-  function handleChangeQuery(event) {
-    setQueryName(event.target.value.toLowerCase());
+  function handleChangeQuery(query) {
+    setQueryName(query);
   }
 
   useEffect(() => {
     dispatch(queryName)
   }, [queryName]);
 
-  return handleChangeQuery;
+  return [queryName, handleChangeQuery]
 };
 
 export {useFilterByName}

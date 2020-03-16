@@ -8,17 +8,18 @@ function SearchMenu() {
 
   const {actions:{filterByName}} = useContext(PokemonListContext)
 
-  const handleChangeQuery = useFilterByName(filterByName)
+  const [query,handleChangeQuery] = useFilterByName(filterByName)
 
   return (
     <div className="search-text">
       <input
+        value={query}
         type="text"
         className="search-input"
         placeholder="Search for a Pokemon..."
-        onChange={(event)=>handleChangeQuery(event)}
+        onChange={(event)=>handleChangeQuery(event.target.value.toLowerCase())}
       />
-      <button className="clear-search"></button>
+      <button className="clear-search" onClick={()=>handleChangeQuery("")}></button>
     </div>
   );
 }

@@ -190,9 +190,6 @@ main {
 
 /* Reset types button */
 .reset  {
-  /* display: inline-block; */
-  /* width: 100%; */
-  /* padding: 0 5em; */
   border-radius: 10px;
   border: 3px solid rgb(200, 200, 200);
   background: whitesmoke;
@@ -202,8 +199,17 @@ main {
 .burger-button {
   display: flex;
   flex-direction: column;
-  height: 30%;
-  justify-content: space-around;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 100%;
+  width: 20%;
+  padding: 1em;
+  transition: all .2s;
+}
+
+.burger-button:hover{
+  cursor: pointer;
+  background-color: #df4c4a
 }
 
 .burgerline {
@@ -212,6 +218,7 @@ main {
   width: 20px;
   background: whitesmoke;
 }
+
 .search-text {
   display: flex;
   justify-content: space-around;
@@ -229,6 +236,12 @@ main {
   width: 1.1em;
   color: #ef5350;
   text-align: center;
+  cursor: pointer;
+  transition: all .2s;
+}
+
+.clear-search:hover{
+  transform: scale(1.4);
 }
 
 .clear-search:before,
@@ -257,6 +270,17 @@ main {
   /* border-radius: 10px; */
   padding: 0.5em;
   width: 85%;
+  transition: all .5s;
+}
+
+.search-input:focus{
+  border-radius: 10px;
+  background: whitesmoke;
+  color: rgb(31, 31, 31);
+}
+
+.search-input:focus::placeholder{
+  color: rgb(31, 31, 31)
 }
 
 .search-input::placeholder,
@@ -323,12 +347,8 @@ main {
   width: 44px;
 }
 
-.pokemon-missing {
-  display: none;
-}
-
 .pokemon-missing img {
-  width: 30%;
+  width: auto;
 }
 
 .pokemon-missing p {
@@ -337,7 +357,7 @@ main {
   padding: 0.3em;
 }
 
-.pokemon-missing-active {
+.pokemon-missing {
   grid-column: 1/-1;
   display: flex;
   flex-direction: column;
@@ -789,8 +809,8 @@ img {
 
 .asset img:nth-child(1) {
   display: block;
-  max-width: 100px;
-  max-height: 100px;
+  /* max-width: 100px; */
+  /* max-height: 100px; */
   margin: auto;
   position: relative;
   cursor: pointer;
@@ -861,7 +881,7 @@ img {
   align-items: center;
   width: 70%;
   height: 40%;
-  padding: 1.5em 0;
+  /* padding: 1.5em 0; */
 }
 
 .stats-row {
@@ -913,8 +933,12 @@ img {
 }
 
 .evs-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
 }
+
 .damage-container {
   display: flex;
   flex-direction: column;
@@ -927,8 +951,8 @@ img {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 95vw;
-  margin: auto;
+  width: 100%;
+  /* margin: auto; */
   padding-bottom: 0.3em;
   padding-top: 0.3em;
 }
@@ -942,11 +966,12 @@ img {
 }
 
 .evs-list .ev {
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 30%;
+  width: 30%; */
+  text-align: center;
 }
 
 .ev img {
@@ -1219,7 +1244,11 @@ a:hover {
 
 @media screen and (min-width: 768px) {
   .nav-bar {
-    height: 10vh;
+    height: 100px;
+  }
+
+  .burger-button{
+    padding: 2em;
   }
 
   .search-input {
@@ -1253,7 +1282,7 @@ a:hover {
 
   .pkmn-list {
     grid-template-columns: repeat(4, 1fr);
-    /* margin-top: 5em */
+    margin-top: 120px
   }
 
   .pkmn-card {

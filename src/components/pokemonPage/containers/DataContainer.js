@@ -15,6 +15,10 @@ function DataContainer() {
     state: { pokemon, details }
   } = useContext(PokemonContext);
 
+  const [tabsSelected, setTabSelected] = useState();
+
+  const tabs = [<Description/>, <Stats/>, <DamageContainer/>, <Evolutions/>]
+
   const { types, stats, weight, height } = pokemon;
 
   const description = details["flavor_text_entries"].filter(

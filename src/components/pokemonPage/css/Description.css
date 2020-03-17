@@ -5,18 +5,19 @@
 .description {
   margin-bottom: 1em;
   line-height: 2em;
+  text-align: center;
 }
 
 .info-container {
-  /* padding: .5em; */
-  border-radius: 10px;
-  justify-content: space-around;
   display: flex;
-  box-shadow: 0 0 18px 10px #0000000a;
+  justify-content: space-around;
 }
 
 .info-boxes {
   display: flex;
   flex-direction: column;
-  width: 30%;
+  align-items: center;
+  width: 20%;
+  border-radius: 10px;
+  box-shadow: 0 0 18px 5px #0000000a;
 }

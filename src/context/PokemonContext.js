@@ -82,6 +82,9 @@ const PokemonContextProvider = props => {
         const pokemon = await pokemonResponse.json();
         const details = await detailsResponse.json();
 
+        //Reverse the types's array
+        pokemon.types.reverse();
+
         //Take the evo chain URL
         //Then, fetch evo data
 
@@ -89,15 +92,14 @@ const PokemonContextProvider = props => {
         const evolutionsResponse = await fetch(EVO_URL, { signal });
         const evolutionsData = await evolutionsResponse.json();
 
-        //Reverse the types's array
-        await pokemon.types.reverse();
+
 
         dispatch({ type: FETCH_POKEMON_OK, payload: pokemon });
-        setTimeout(() => {
-          dispatch({ type: FETCH_DETAILS_OK, payload: details });
-          dispatch({ type: FETCH_EVOLUTIONS_OK, payload: evolutionsData });
-          dispatch({ type: FETCH_COMPLETE });
-        }, 1000);
+        dispatch({ type: FETCH_DETAILS_OK, payload: details });
+        dispatch({ type: FETCH_EVOLUTIONS_OK, payload: evolutionsData });
+        dispatch({ type: FETCH_COMPLETE });
+        
+
       } catch (error) {
         console.log(error);
 
@@ -119,16 +121,17 @@ const PokemonContextProvider = props => {
    */
 
   //LOADING
-  if (state.loading && state.pokemon)
-    return <Loader background={state.pokemon.types[0].type.name} />;
-  if (state.loading) return <Loader background={props.backgroundType ?props.backgroundType : "default"} />;
+  
+  if (state.loading && state.pokemon) return <Loader background={state.pokemon.types[0].type.name} />;
+  
+  if (state.loading) return <Loader background={props.backgroundType ? props.backgroundType : "default"} />;
 
   //ERROR
   if (state.error) return <h1>{state.error.message}</h1>;
 
   //FETCH COMPLETE, NORMAL RENDER
   return (
-    <PokemonContext.Provider value={{ state, actions: { dispatch } }}>
+    <PokemonContext.Provider value={{ state, actions: { dispatch }, props:{id} }}>
       {props.children}
     </PokemonContext.Provider>
   );

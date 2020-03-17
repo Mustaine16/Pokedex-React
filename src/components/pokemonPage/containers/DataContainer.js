@@ -15,9 +15,7 @@ function DataContainer() {
     state: { pokemon, details }
   } = useContext(PokemonContext);
 
-  const [tabsSelected, setTabSelected] = useState();
-
-  const tabs = [<Description/>, <Stats/>, <DamageContainer/>, <Evolutions/>]
+  const [activeContent, setActiveContent] = useState("description");
 
   const { types, stats, weight, height } = pokemon;
 
@@ -25,28 +23,31 @@ function DataContainer() {
     e => e.language.name === "en"
   )[0]["flavor_text"];
 
-  {
-    console.log(state);
+  const content = {
+    description: (
+      <Description description={description} weight={weight} height={height} />
+    ),
+    stats: <Stats stats={stats} types={types} />,
+    damageContainer: <DamageContainer types={types} />,
+    evolutions: <Evolutions />
+  };
+
+  function handleActiveTab(tabToActive) {
+    setActiveContent(tabToActive);
   }
+
+  //Set background color
+  useEffect(() => {
+    const backgroundTpye = state.pokemon.types[0].type.name;
+    document.querySelector(".modall").classList.add(backgroundTpye);
+  },[]);
 
   return (
     <section
       className={`tabs ${types[1] ? types[1].type.name : types[0].type.name}`}
     >
-      <TabMenu></TabMenu>
-
-      <div className="container">
-        <Description
-          description={description}
-          weight={weight}
-          height={height}
-        />
-        <Stats stats={stats} types={types}></Stats>
-
-        <DamageContainer types={types}></DamageContainer>
-
-        <Evolutions></Evolutions>
-      </div>
+      <TabMenu handleActiveTab={handleActiveTab}></TabMenu>
+      <div className="container">{content[activeContent]}</div>
     </section>
   );
 }

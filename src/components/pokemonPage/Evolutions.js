@@ -5,18 +5,25 @@ import Sprite from "../home/Sprite";
 
 export default function Evolutions() {
   const {
+    state,
     state: {
       pokemon: { name },
       evolutionsData
     }
   } = useContext(PokemonContext);
-
+  
   const [evolutions, setEvolutions] = useState([]);
 
   useEffect(() => {
     const parsedEvos = parseEvolutionsData();
     getEvolutions(parsedEvos);
   }, []);
+
+  //Set background color
+  useEffect(()=>{
+    const backgroundTpye  = (state.pokemon.types[0].type.name)
+    document.querySelector(".modall").classList.add(backgroundTpye)
+  })
 
   //Here we maniputale the evolutionsChain property from evolutions to create a temporal array
   function parseEvolutionsData() {
@@ -44,7 +51,6 @@ export default function Evolutions() {
 
       evoData = evoData["evolves_to"][1] || evoData["evolves_to"][0];
     } while (!!evoData && evoData.hasOwnProperty("evolves_to"));
-
     return evoChain;
   }
 
@@ -66,12 +72,12 @@ export default function Evolutions() {
         let secondEvolution = "";
 
         //Nincada
-        if (name == "nincada") {
+        if (name === "nincada") {
           secondEvolution = createRowEvolution(0, 2, evolutions);
         }
 
         //Burmy
-        if (name == "burmy") {
+        if (name === "burmy") {
           secondEvolution = createRowEvolution(0, 2, evolutions);
         }
 
@@ -149,14 +155,18 @@ export default function Evolutions() {
     } else {
       setEvolutions([]);
     }
+    console.log(evolutionsArray);
+    
     setEvolutions(evolutionsArray);
+    // setEvolutions(evolutions)
   }
 
   function createRowEvolution(i1, i2, evolutions) {
     const rowEvolution = {
       base: { name: "", id: "" },
       evolution: { name: "", id: "" },
-      conditions: []
+      conditions: [],
+      type: ""
     };
 
     const { base, evolution } = rowEvolution;
@@ -172,6 +182,10 @@ export default function Evolutions() {
     //Conditions
     rowEvolution.conditions = incrustEvolutionsTriggers(i2, evolutions);
 
+    //Types
+    base.type = state.pokemon.types[0].type.name
+    evolution.type = state.pokemon.types[0].type.name
+
     return rowEvolution;
   }
 
@@ -185,7 +199,7 @@ export default function Evolutions() {
 
     //---Trade----
 
-    if (triggerName == "trade") {
+    if (triggerName === "trade") {
       triggersArr.push("Trade");
 
       //Si necesita tener un objeto
@@ -201,12 +215,12 @@ export default function Evolutions() {
 
     //---Use-item----
 
-    if (triggerName == "use-item") {
+    if (triggerName === "use-item") {
       triggersArr.push(`Using ${evoConditions.item.name}`);
 
       //Si requier cierto genero para evolucionar
       if (evoConditions.gender) {
-        evoConditions.gender == 1
+        evoConditions.gender === 1
           ? triggersArr.push("(Female)")
           : triggersArr.push("(Male)");
       }
@@ -214,7 +228,7 @@ export default function Evolutions() {
 
     //---Level-up----
 
-    if (triggerName == "level-up") {
+    if (triggerName === "level-up") {
       //Nivel comun
       evoConditions.min_level
         ? triggersArr.push(`Level ${evoConditions.min_level}`)
@@ -222,7 +236,7 @@ export default function Evolutions() {
 
       //Genero
       if (evoConditions.gender) {
-        evoConditions.gender == 1
+        evoConditions.gender === 1
           ? triggersArr.push("(Female)")
           : triggersArr.push("(Male)");
       }
@@ -273,26 +287,26 @@ export default function Evolutions() {
 
     //Sylveon
 
-    if (name == "sylveon") {
+    if (name === "sylveon") {
       triggersArr.push("Knowing a Fairy type move");
       triggersArr.push("At least levels 2 of affection");
     }
 
     //Mantine
 
-    if (name == "mantine") {
+    if (name === "mantine") {
       triggersArr.push("Only if a Remoraid is in the player party");
     }
 
     //Milotic
 
-    if (name == "milotic") {
+    if (name === "milotic") {
       triggersArr.push("Level up beauty condition to 170");
     }
 
     //Shedinja
 
-    if (name == "shedinja") {
+    if (name === "shedinja") {
       triggersArr.push(
         "After, Nincada evolves to Ninjask, if there is an empty space in the party, it will appear"
       );
@@ -303,13 +317,13 @@ export default function Evolutions() {
 
     //Pangoro
 
-    if (name == "pangoro") {
+    if (name === "pangoro") {
       triggersArr.push("There must be a Dark-Type Pokemon in the party");
     }
 
     //Malamar
 
-    if (name == "malamar") {
+    if (name === "malamar") {
       triggersArr.push(
         "the Nintendo 3DS system must be held upside-down when it levels up"
       );
@@ -317,7 +331,7 @@ export default function Evolutions() {
 
     //Goodra
 
-    if (name == "goodra") {
+    if (name === "goodra") {
       triggersArr.push("When its raining or foogy in the overworld");
     }
 
@@ -330,8 +344,11 @@ export default function Evolutions() {
       {evolutions.length >= 1 ? (
         evolutions.map(evo => {
           return (
-            <div className="evs-list">
-              <Link to={evo.base.id} className="ev">
+            <div className="evs-list" key={evo.evolution.id}>
+              <Link to={{
+                pathname: evo.base.id,
+                backgroundType: evo.base.type
+              }} className="ev">
                 <Sprite
                   name={evo.base.name}
                   id={evo.base.id}
@@ -340,11 +357,14 @@ export default function Evolutions() {
               </Link>
               <figure className="arrow-div">
                 <img className="arrow" src="./img/arrow.svg" />
-                {evo.conditions.map(condition => (
-                  <figcaption>{condition}</figcaption>
+                {evo.conditions.map((condition, i) => (
+                  <figcaption key={"condition " + i }>{condition}</figcaption>
                 ))}
               </figure>
-              <Link to={evo.evolution.id} className="ev">
+              <Link to={{
+                pathname: evo.evolution.id,
+                backgroundType: evo.evolution.type
+              }} className="ev">
                 <Sprite
                   name={evo.evolution.name}
                   id={evo.evolution.id}
@@ -355,7 +375,7 @@ export default function Evolutions() {
           );
         })
       ) : (
-        <div class="empty">{name} has no evolutions</div>
+        <div className="empty">{name} has no evolutions</div>
       )}
     </article>
   );

@@ -19,7 +19,7 @@ function SearchMenu() {
         placeholder="Search for a Pokemon..."
         onChange={(event)=>handleChangeQuery(event.target.value.toLowerCase())}
       />
-      <button className="clear-search" onClick={()=>handleChangeQuery("")}></button>
+      <button className="clear-search" onClick={()=>handleChangeQuery("")} aria-label="clear search"></button>
     </div>
   );
 }

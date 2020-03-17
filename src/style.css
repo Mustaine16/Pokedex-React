@@ -113,8 +113,9 @@ body {
 main {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
+  min-height: 550px;
 }
 
 .header-sticky {
@@ -147,8 +148,8 @@ main {
   transition: all 0.3s;
 }
 
-.search-types  span{
-  padding: .5em;
+.search-types span {
+  padding: 0.5em;
 }
 
 .search-types-list {
@@ -189,7 +190,7 @@ main {
 }
 
 /* Reset types button */
-.reset  {
+.reset {
   border-radius: 10px;
   border: 3px solid rgb(200, 200, 200);
   background: whitesmoke;
@@ -204,12 +205,12 @@ main {
   height: 100%;
   width: 20%;
   padding: 1em;
-  transition: all .2s;
+  transition: all 0.2s;
 }
 
-.burger-button:hover{
+.burger-button:hover {
   cursor: pointer;
-  background-color: #df4c4a
+  background-color: #df4c4a;
 }
 
 .burgerline {
@@ -237,10 +238,10 @@ main {
   color: #ef5350;
   text-align: center;
   cursor: pointer;
-  transition: all .2s;
+  transition: all 0.2s;
 }
 
-.clear-search:hover{
+.clear-search:hover {
   transform: scale(1.4);
 }
 
@@ -270,17 +271,17 @@ main {
   /* border-radius: 10px; */
   padding: 0.5em;
   width: 85%;
-  transition: all .5s;
+  transition: all 0.5s;
 }
 
-.search-input:focus{
+.search-input:focus {
   border-radius: 10px;
   background: whitesmoke;
   color: rgb(31, 31, 31);
 }
 
-.search-input:focus::placeholder{
-  color: rgb(31, 31, 31)
+.search-input:focus::placeholder {
+  color: rgb(31, 31, 31);
 }
 
 .search-input::placeholder,
@@ -368,11 +369,13 @@ main {
 .pkmn-list {
   display: grid;
   width: 100vw;
-  margin-top: 70px;
-  margin-right: auto;
-  margin-left: auto;
   grid-template-columns: repeat(2, 1fr);
   gap: 1em;
+  justify-items: center;
+  margin-top: 70px;
+  margin-bottom: 1em;
+  margin-right: auto;
+  margin-left: auto;
 
   /* margin-bottom: 1em; */
   /* min-height: 20vh; */
@@ -480,49 +483,91 @@ img {
   border: var(--ground-border);
 }
 
+.ground.tabs .description,
+.ground.tabs .info-boxes span,
+.ground.tabs .stats-row span,
+.ground.tabs .empty,
+.ground.tabs figcaption,
+.ground.tabs label:hover{
+  color:whitesmoke
+}
+
 .flying {
   background: var(--flying-bg);
   border: var(--flying-border);
+}
+.flying.tabs label:hover{
+  color: whitesmoke;
 }
 
 .poison {
   background: var(--poison-bg);
   border: var(--poision-border);
 }
+.poison.tabs label:hover{
+  color: whitesmoke;
+}
 
 .fairy {
   background: var(--fairy-bg);
   border: var(--fairy-border);
+}
+.fairy.tabs label:hover{
+  color: whitesmoke;
 }
 
 .fighting {
   background: var(--fighting-bg);
   border: var(--fighting-border);
 }
+.fighting.tabs label:hover{
+  color: whitesmoke;
+}
 
 .psychic {
   background: var(--psychic-bg);
   border: var(--phsychic-border);
+}
+.psychic.tabs .description,
+.psychic.tabs .info-boxes span,
+.psychic.tabs .stats-row span,
+.psychic.tabs .empty,
+.psychic.tabs figcaption,
+.psychic.tabs label:hover{
+  color:whitesmoke
 }
 
 .ghost {
   background: var(--ghost-bg);
   border: var(--ghost-border);
 }
+.ghost.tabs label:hover{
+  color: whitesmoke;
+}
 
 .dragon {
   background: var(--dragon-bg);
   border: var(--dragon-border);
+}
+.dragon.tabs label:hover{
+  color: whitesmoke;
 }
 
 .fire {
   background: var(--fire-bg);
   border: var(--fire-border);
 }
+.fire.tabs label:hover{
+  color: whitesmoke;
+}
+
 
 .bug {
   background: var(--bug-bg);
   border: var(--bug-border);
+}
+.bug.tabs label:hover{
+  color: whitesmoke;
 }
 
 .ice {
@@ -542,6 +587,9 @@ img {
   background: var(--dark-bg);
   border: var(--dark-border);
 }
+.dark.tabs label:hover{
+  color: whitesmoke;
+}
 
 .grass {
   background: var(--grass-bg);
@@ -552,6 +600,9 @@ img {
   background: var(--water-bg);
   border: var(--water-border);
   color: rgb(245, 245, 245);
+}
+.water.tabs label:hover{
+  color: whitesmoke;
 }
 
 .rock {
@@ -566,7 +617,11 @@ img {
 }
 
 .steel .stats-container span,
-.steel .empty {
+.steel .empty, 
+.steel .description,
+.steel .info-boxes span,
+.steel .empty,
+.steel figcaption {
   color: black;
 }
 
@@ -753,8 +808,8 @@ img {
   transition: all 0.3s;
 }
 
-.modal-loader-container.default{
-  background: #ef5350
+.modal-loader-container.default {
+  background: #ef5350;
 }
 
 .modal-loader {
@@ -861,7 +916,7 @@ img {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 25%;
+  width: 95px;
   margin: auto;
   text-transform: uppercase;
   text-align: center;
@@ -957,10 +1012,10 @@ img {
   padding-top: 0.3em;
 }
 
-.evs-list span {
+.evs-list figcaption {
   text-align: center;
   text-transform: uppercase;
-  font-size: 0.8em;
+  font-size: 0.9em;
   font-weight: 300;
   padding: 0.2rem;
 }
@@ -973,10 +1028,14 @@ img {
   width: 30%; */
   text-align: center;
 }
-
-.ev img {
+.pkmn-card img {
   max-width: 100%;
   max-height: 115px;
+}
+
+.evs-list .ev img {
+  max-width: 100px;
+  max-height: 100px;
 }
 
 .evolutions-title,
@@ -1169,7 +1228,7 @@ img {
   flex-flow: column;
   justify-content: space-evenly;
   align-content: center;
-  height: 500px;
+  min-height: 600px;
   width: 100vw;
   background: #ef5350;
   border-top: 1em solid #3f3f3f;
@@ -1247,7 +1306,7 @@ a:hover {
     height: 100px;
   }
 
-  .burger-button{
+  .burger-button {
     padding: 2em;
   }
 
@@ -1282,7 +1341,7 @@ a:hover {
 
   .pkmn-list {
     grid-template-columns: repeat(4, 1fr);
-    margin-top: 120px
+    margin-top: 120px;
   }
 
   .pkmn-card {
@@ -1302,12 +1361,6 @@ a:hover {
   .sprite-and-type,
   .stats-container {
     padding: 1em;
-  }
-
-  .container-att-def {
-    width: 100%;
-    display: flex;
-    align-items: flex-start;
   }
 
   .counter-types {
@@ -1339,17 +1392,6 @@ a:hover {
     height: 83vh;
   }
 
-  .stats-container,
-  .evs-list {
-    margin: auto;
-    width: 70vw;
-  }
-
-  .container-att-def {
-    width: 80vw;
-    justify-content: center;
-  }
-
   .offensive-container-by-types {
     width: 100%;
     align-items: center;
@@ -1362,14 +1404,10 @@ a:hover {
 }
 
 @media screen and (min-width: 1366px) {
-  .modal {
-    /* height: 100vh; */
-    width: 30vw;
-    transform: translateY(0vh) !important;
-    /* background-image: url("https://wallpapercave.com/wp/wp3170166.jpg");
-    background-size: cover; */
-    position: fixed;
-    right: 0;
+  .modall {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
   }
 
   .modal-default-container {
@@ -1381,15 +1419,6 @@ a:hover {
     background-color: #ef5350;
   }
 
-  main {
-    width: 70vw;
-    margin-right: auto;
-  }
-
-  .nav-bar {
-    width: 70vw;
-  }
-
   .pkmn-list {
     width: 95%;
   }
@@ -1397,11 +1426,6 @@ a:hover {
   .generations {
     width: 65vw;
     right: 32.5vw;
-  }
-
-  .footer {
-    width: 70vw;
-    margin-right: 30vw;
   }
 
   /* Modal */
@@ -1419,11 +1443,13 @@ a:hover {
   }
 
   .evs-list {
-    width: 100% !important;
+    justify-content: space-around;
   }
 
   .container-att-def {
     width: 100%;
+    display: flex;
+    align-items: flex-start;
   }
 
   .burger-button {

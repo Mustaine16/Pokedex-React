@@ -1,15 +1,17 @@
-import React, { useState, useContext, Fragment } from "react";
+import React from "react";
 
-import { PokemonProvider, PokemonContext } from "../context/PokemonContext";
+import { PokemonProvider } from "../context/PokemonContext";
 
 import Header from "../components/pokemonPage/Header";
 import DataContainer from "../components/pokemonPage/containers/DataContainer";
 
-function PokemonPage({location:{backgroundType}}) {
+function PokemonPage( {match:{params:{id}}}) {
   return (
-    <PokemonProvider backgroundType={backgroundType}>
-      <Header></Header>
-      <DataContainer></DataContainer>
+    <PokemonProvider id={id}>
+        <div className={"modall"}>
+        <Header></Header>
+        <DataContainer></DataContainer>
+      </div>
     </PokemonProvider>
   );
 }

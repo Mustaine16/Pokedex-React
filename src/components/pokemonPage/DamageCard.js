@@ -9,6 +9,7 @@ export default function DamageCard({
   relation
 }) {
   const TypesTitle = () => {
+    
     //Defense Title
     if (relation === "defense") {
       if (types.length >= 2) {

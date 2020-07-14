@@ -340,7 +340,6 @@ export default function Evolutions() {
 
   return (
     <article className="evs-container content">
-      <h3 className="evolutions-title">Evolutions</h3>
       {evolutions.length >= 1 ? (
         evolutions.map(evo => {
           return (

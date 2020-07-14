@@ -6,7 +6,6 @@ export default function DamageRelations({ data, types }) {
   if (!data) {
     return (
       <section className="damage-container content">
-        <h2 className="damage-title">Damage Relation</h2>
 
         <div className="container-att-def">
           {/* CONTAINER DE DEFENSA */}
@@ -30,7 +29,6 @@ export default function DamageRelations({ data, types }) {
 
   return (
     <section className="damage-container content">
-      <h2 className="damage-title">Damage Relation</h2>
 
       <div className="container-att-def">
         {/* CONTAINER DE DEFENSA */}
